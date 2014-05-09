@@ -27,7 +27,6 @@ public class BelajarTipeData {
         arrayOfByte[3] = 1;
         arrayOfByte[4] = 1;
         byte[][] multiDimensionArray = new byte[1][2];
-//        arrayOfByte = new byte[1];
         logger.info("byte value: " + byteValue);
         logger.info("short value: " + shortValue);
         logger.info("int value: " + intValue);
