@@ -14,16 +14,19 @@ public class JuiceWorker implements Worker, StrawberryConstants {
     public List<Strawberry> work(List<Byte> ids) {
         final ArrayList<Strawberry> strawberries = new ArrayList<Strawberry>();
         for (Byte id : ids) {
-            if (id < 0)
-//                throw new IllegalArgumentException("Hoi, id gak valid!!!");
-                throw new InvalidStrawberryIdException();
-            if (id == STANDART_STRAWBERRY_DRINK)
-                strawberries.add(new StandartStrawberryDrink());
-            else if (id == MILK_STRAWBERRY_DRINK)
-                strawberries.add(new MilkStrawberryDrink());
-            else
-                strawberries.add(new ChocolateToppingMilkStrawberryDrink());
+            strawberries.add(work(id));
         }
         return strawberries;
+    }
+
+    public Strawberry work(Byte id) {
+        if (id < 1)
+            throw new InvalidStrawberryIdException();
+        if (id == STANDART_STRAWBERRY_DRINK)
+            return new StandartStrawberryDrink();
+        else if (id == MILK_STRAWBERRY_DRINK)
+            return new MilkStrawberryDrink();
+        else
+            return new ChocolateToppingMilkStrawberryDrink();
     }
 }

@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface Worker {
     List<Strawberry> work(List<Byte> ids);
+
+    Strawberry work(Byte id);
 }

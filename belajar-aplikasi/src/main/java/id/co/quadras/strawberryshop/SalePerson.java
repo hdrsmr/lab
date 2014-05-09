@@ -8,46 +8,25 @@ import java.util.*;
  * Created by achmad on 5/8/2014.
  */
 public class SalePerson implements StrawberryConstants {
-    private final Worker browniesWorker = new BrowniesWorker();
-    private final Worker spongeCakeWorker = new SpongeCakeWorker();
-    private final Worker pancakeWorker = new PancakeWorker();
-    private final Worker juiceWorker = new JuiceWorker();
     private final Map<Byte, Worker> workers = new HashMap<Byte, Worker>(6);
     private static final Cashier CASHIER = new Cashier();
     private static final SalePerson SALE_PERSON = new SalePerson();
 
     private SalePerson() {
+        final Worker juiceWorker = new JuiceWorker();
         workers.put(STANDART_STRAWBERRY_DRINK, juiceWorker);
         workers.put(MILK_STRAWBERRY_DRINK, juiceWorker);
         workers.put(CHOCHOLATE_TOPPING_STRAWBERRY_DRINK, juiceWorker);
-        workers.put(STRAWBERRY_BROWNIES, browniesWorker);
-        workers.put(STRAWBERRY_PANCAKE, pancakeWorker);
-        workers.put(STRAWBERRY_SPONGE_CAKE, spongeCakeWorker);
+        workers.put(STRAWBERRY_BROWNIES, new BrowniesWorker());
+        workers.put(STRAWBERRY_PANCAKE, new PancakeWorker());
+        workers.put(STRAWBERRY_SPONGE_CAKE, new SpongeCakeWorker());
     }
 
     public List<Strawberry> processOrder(List<Byte> strawberryIds) {
-        final ArrayList<Strawberry> strawberries = new ArrayList<Strawberry>();
-//        final ArrayList<Byte> beverages = new ArrayList<Byte>();
+        final List<Strawberry> strawberries = new ArrayList<Strawberry>();
         for (Byte id : strawberryIds) {
-            //strategy pattern
-            strawberries.addAll(workers.get(id).work(Arrays.asList(id)));
-//            if (id == 1 || id == 2 || id == 3) {
-//                beverages.add(id);
-//            } else if (id == STRAWBERRY_BROWNIES) {
-//                strawberries.addAll(browniesWorker.work(Arrays.asList(id), orderIds));
-//            } else if (id == StrawberryConstants.STRAWBERRY_PANCAKE) {
-//                strawberries.addAll(pancakeWorker.work(Arrays.asList(id), orderIds));
-//            } else if (id == StrawberryConstants.STRAWBERRY_SPONGE_CAKE) {
-//                strawberries.addAll(spongeCakeWorker.work(Arrays.asList(id), orderIds));
-//            }
+            strawberries.add(workers.get(id).work(id));
         }
-//        strawberries.addAll(juiceWorker.work(beverages, orderIds));
-        //1-3 adalah minuman
-        //4-6 adalah makanan
-        //4 adalah brownies
-        //5 adalah pancake
-        //6 adalah spongecake
-        // lakukan percabangan mau diarahkan ke worker mana
         return strawberries;
     }
 
@@ -56,6 +35,6 @@ public class SalePerson implements StrawberryConstants {
     }
 
     public static List<Strawberry> acceptOrder(List<Byte> strawberryIds) {
-        return SALE_PERSON.acceptOrder(strawberryIds);
+        return SALE_PERSON.processOrder(strawberryIds);
     }
 }

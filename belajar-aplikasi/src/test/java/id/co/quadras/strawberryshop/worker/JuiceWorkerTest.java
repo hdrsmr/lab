@@ -70,9 +70,9 @@ public class JuiceWorkerTest {
     }
 
     @Test
-    public void standartStrawberryAndMilkStrawberryAndChoco() throws Exception {
+    public void standartStrawberryAndMilkStrawberryAndChoco(){
         final List<Strawberry> strawberries = juiceWorker.work(Arrays.asList((byte) 1, (byte) 2, (byte) 3));
-        assertThat(strawberries).hasSize(2);
+        assertThat(strawberries).hasSize(3);
         assertThat(strawberries).areExactly(1, new Condition<Strawberry>() {
             @Override
             public boolean matches(Strawberry value) {

@@ -15,36 +15,15 @@ public class BrowniesWorker implements Worker {
 
     @Override
     public List<Strawberry> work(List<Byte> ids) {
-//        final List<Strawberry> strawberries = new ArrayList<Strawberry>();
-        //for each loop
-//        for (Byte id : ids) {
-//            if (id > 1)
-//                continue;
-//            strawberries.add(new StrawberryBrownies());
-//        }
-        return createBrownies(ids.size());
-//        return strawberries;
+        final List<Strawberry> strawberries = new ArrayList<Strawberry>();
+        for (Byte id : ids) {
+            strawberries.add(work(id));
+        }
+        return strawberries;
     }
 
-    private List<Strawberry> createBrownies(int size) {
-        //size = 3
-        final List<Strawberry> strawberries = new ArrayList<Strawberry>();
-        //for(initialization;evaluation;increment)
-//        for (;strawberries.size() < size;) {
-//        for (int i = 1; i <= size; i++) {
-//            logger.debug("value of i: {}" , i);
-//            strawberries.add(new StrawberryBrownies());
-//        }
-//        logger.debug("Strawberries size : {}", strawberries.size());
-        while (strawberries.size() < size) {
-            strawberries.add(new StrawberryBrownies());
-        }
-//        logger.debug("Strawberries size : {}", strawberries.size());
-//        do {
-//            strawberries.add(new StrawberryBrownies());
-//        }
-//        while (strawberries.size() < size);
-//        logger.debug("Strawberries size : {}", strawberries.size());
-        return strawberries;
+    @Override
+    public Strawberry work(Byte id) {
+        return new StrawberryBrownies();
     }
 }

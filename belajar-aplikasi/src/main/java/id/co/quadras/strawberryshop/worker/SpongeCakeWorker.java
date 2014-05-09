@@ -12,4 +12,9 @@ public class SpongeCakeWorker implements Worker {
     public List<Strawberry> work(List<Byte> ids) {
         return null;
     }
+
+    @Override
+    public Strawberry work(Byte id) {
+        return null;
+    }
 }
